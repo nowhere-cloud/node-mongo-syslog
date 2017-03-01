@@ -1,0 +1,15 @@
+{
+  "name": "node-syslog",
+  "version": "1.0.0",
+  "description": "Simply, the syslog collector to pump the data into MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^4.8.5",
+    "syslogd": "^1.1.2"
+  }
+}
