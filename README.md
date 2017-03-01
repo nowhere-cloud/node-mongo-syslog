@@ -1,0 +1,1 @@
+[![Code Climate](https://codeclimate.com/github/nowhere-cloud/node-mongo-syslog/badges/gpa.svg)](https://codeclimate.com/github/nowhere-cloud/node-mongo-syslog) [![Issue Count](https://codeclimate.com/github/nowhere-cloud/node-mongo-syslog/badges/issue_count.svg)](https://codeclimate.com/github/nowhere-cloud/node-mongo-syslog)
