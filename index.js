@@ -30,4 +30,4 @@ class App {
 }
 
 const app = new App(process.env.MONGODB_URI);
-app.start();
+app.listen();
