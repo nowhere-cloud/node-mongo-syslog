@@ -140,10 +140,10 @@ rules:
   func-style: 0
   id-length: 0
   id-match: 0
-  indent: 0
+  indent: [error, 2]
   jsx-quotes: 0
   key-spacing: 0
-  linebreak-style: 0
+  linebreak-style: [error, unix]
   lines-around-comment: 0
   max-depth: 0
   max-len: 0
@@ -176,10 +176,10 @@ rules:
   operator-linebreak: 0
   padded-blocks: 0
   quote-props: 0
-  quotes: 0
+  quotes: [error, double]
   require-jsdoc: 0
   semi-spacing: 0
-  semi: 0
+  semi: [error, always]
   sort-vars: 0
   space-after-keywords: 0
   space-before-blocks: 0

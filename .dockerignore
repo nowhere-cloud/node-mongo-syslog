@@ -1,1 +1,8 @@
 node_modules/
+.codeclimate.yml
+.eslintignore
+.eslintrc
+.editorconfig
+.gitignore
+LICENSE
+README.md
