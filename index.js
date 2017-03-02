@@ -14,12 +14,13 @@ class App {
     db.once("open", () => {
       console.log("MongoDB Connection Established.");
     });
-    this.Syslog = db.model("Syslog", schema.schema);
+    this.Model = db.model("Syslog", schema.schema);
   }
 
   listen() {
+    const model = this.Model;
     Syslogd(function(info) {
-      this.Syslog.create(info, (err) => {
+      model.create(info, (err) => {
         if (err) return console.error.bind(console, err);
       });
     }).listen(514, function(err) {
