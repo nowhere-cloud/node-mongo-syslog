@@ -2,7 +2,10 @@
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+/**
+ * This is the Syslog parser parsed format.
+ * @type Hash
+ */
 exports.schema = Schema({
   facility: Number,
   severity: Number,
