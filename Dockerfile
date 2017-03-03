@@ -9,5 +9,6 @@ RUN npm install
 EXPOSE 514/tcp 514/udp
 
 ENV MONGODB_URI mongodb://mongo/nowhere
+ENV AMQP_URI amqp://nowhere-rabbitmq
 
 CMD [ "npm", "start" ]

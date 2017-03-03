@@ -139,7 +139,7 @@ rules:
   func-style: 0
   id-length: 0
   id-match: 0
-  indent: [error, 2]
+  indent: [error, 4]
   jsx-quotes: 0
   key-spacing: 0
   linebreak-style: [error, unix]

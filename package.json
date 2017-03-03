@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start-syslogd": "node syslogd.js",
+    "start-amqpd": "node amqp.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "amqplib": "^0.5.1",
+    "moment": "^2.17.1",
     "mongoose": "^4.8.5",
     "syslogd": "^1.1.2"
   }
