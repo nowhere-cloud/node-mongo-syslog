@@ -101,4 +101,4 @@ class Rabbit {
 }
 
 const app = new Rabbit(process.env.AMQP_URI, process.env.MONGODB_URI);
-app.start();
+app.receiveMessage();
