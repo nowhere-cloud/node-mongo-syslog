@@ -28,8 +28,8 @@ class Rabbit {
             console.log("MongoDB Connection Established.");
         });
         this.Model = db.model("Syslog", schema.schema);
-        this.target = "out";
-        this.listen = "syslog";
+        this.target = "syslog-out";
+        this.listen = "syslog-in";
     }
 
     /**
@@ -41,9 +41,10 @@ class Rabbit {
      */
     writeMessage(msg, msg_id) {
         const target = this.target;
-        AMQP.connect(this.AURI).then((conn) => conn.createChannel().then((ch) => {
-            const q = ch.assertQueue(target);
-            return q.then(() => {
+        AMQP.connect(this.AURI).then((conn) => conn.createChannel().then(
+        (ch) => {
+            let q = ch.assertQueue(target, {durable: true});
+            return q.then((_qok) => {
                 ch.sendToQueue(target, new Buffer.from(JSON.stringify(msg)), {
                     correlationId: msg_id
                 });
@@ -62,26 +63,23 @@ class Rabbit {
      */
     receiveMessage() {
         const listen = this.listen;
-        AMQP.connect(this.AURI).then((conn) => conn.createChannel().then((ch) => {
-            const q = ch.assertQueue(listen);
-            return q.then(() => {
-                ch.consume(listen, (msg) => {
-                    let msgContent = JSON.parse(msg.content.toString());
-                    processor(msgContent, msg.properties.correlationId.toString());
-                    return true;
-                }, {
-                    noAck: true
-                });
+        const processor = this.processor;
+        AMQP.connect(this.AURI).then((conn) => conn.createChannel().then(
+        (ch) => {
+            let q = ch.assertQueue(listen, {durable: true});
+            q = q.then(() => {
+                ch.consume(listen, processor, { noAck: true });
+                console.log("RabbitMQ Attached");
             });
-        }).finally(() => {
-            conn.close();
+            return q;
         })).catch(console.warn);
     }
 
-    processor(msg, msgid) {
+    processor(msgRAW) {
         const model = this.Model;
+        let msg = JSON.parse(msgRAW.content.toString());
         let payload = msg["payload"];
-        let result = (function() {
+        let result = (() => {
             // https://stackoverflow.com/questions/8965043/switch-unexpected-token-in-javascript
             switch (msg["task"]) {
             case "get.all":
@@ -89,14 +87,14 @@ class Rabbit {
             case "get.one":
                 return model.find({"_id" : msg["payload"]["id"] });
             }
-        }());
+        });
         let returning = {
             seq: msg["id"],
             taskid: msg["uuid"],
             timestamp: moment(),
             payload: result
         };
-        writeMessage(returning, msgid);
+        writeMessage(returning, msgRAW.properties.correlationId.toString());
     }
 }
 
