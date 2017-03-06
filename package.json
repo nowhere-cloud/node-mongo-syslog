@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "syslogd": "node syslogd.js",
-    "amqpd": "node amqp.js"
+    "syslogd": "node syslogd.js"
   },
   "author": "",
   "license": "MIT",
