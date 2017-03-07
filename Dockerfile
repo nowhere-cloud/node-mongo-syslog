@@ -4,8 +4,7 @@ WORKDIR /srv
 
 COPY . /srv
 
-RUN apk add --no-cache supervisor \
- && npm install
+RUN npm install
 
 EXPOSE 514/tcp 514/udp
 
