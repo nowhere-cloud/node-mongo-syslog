@@ -10,6 +10,5 @@ RUN apk add --no-cache supervisor \
 EXPOSE 514/tcp 514/udp
 
 ENV MONGODB_URI mongodb://mongo/nowhere
-ENV AMQP_URI amqp://nowhere-rabbitmq
 
-ENTRYPOINT ["/usr/bin/supervisord", "-c", "/srv/supervisord.conf"]
+ENTRYPOINT ["npm", "run-script", "syslogd", "--production"]
