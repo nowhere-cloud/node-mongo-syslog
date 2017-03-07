@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
  * This is the Syslog parser parsed format.
  * @type Hash
  */
-syslogSchemas = new Schema({
+const syslogSchemas = new Schema({
     facility: Number,
     severity: Number,
     tag: {
