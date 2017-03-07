@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
  * This is the Syslog parser parsed format.
  * @type Hash
  */
-exports.schema = Schema({
+syslogSchemas = new Schema({
     facility: Number,
     severity: Number,
     tag: {
@@ -26,3 +26,5 @@ exports.schema = Schema({
 }, {
     capped: 2048
 });
+
+module.exports = mongoose.model("Syslog", syslogSchemas);

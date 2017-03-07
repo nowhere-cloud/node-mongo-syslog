@@ -4,7 +4,7 @@
 
 const mongoose = require("mongoose");
 const Syslogd = require("syslogd");
-const schema = require("./schema.js");
+const Syslog = require("./schema.js");
 
 /**
  * Application Core
@@ -23,12 +23,9 @@ class App {
         db.once("open", () => {
             console.log("MongoDB Connection Established.");
         });
-        this.Model = db.model("Syslog", schema.schema);
     }
 
     listen() {
-        /* This const is used for repelling problem of `this` scoping */
-        const model = this.Model;
         /**
          *  This is where all the syslog logic goes.
          *  The Syslog parser will pare the incoming log into a specified dataset
@@ -36,7 +33,7 @@ class App {
          */
         Syslogd(function(info) {
             /* Since the dataset format is good enough. It will pumped into MongoDB Directly. */
-            model.create(info, (err) => {
+            Syslog.create(info, (err) => {
                 /* Error Handling. */
                 if (err) return console.error.bind(console, err);
             });
