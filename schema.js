@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 /**
  * This is the Syslog parser parsed format.
  * @type Hash
+ * http://stackoverflow.com/questions/33791714/data-type-to-store-time-with-mongoose
  */
 const syslogSchemas = new Schema({
     facility: Number,
@@ -13,7 +14,7 @@ const syslogSchemas = new Schema({
         type: [String],
         index: true
     },
-    time: String,
+    time: Date,
     hostname: {
         type: [String],
         index: true
@@ -24,7 +25,8 @@ const syslogSchemas = new Schema({
     size: Number,
     msg: String
 }, {
-    capped: 2048
+    capped: 2048,
+    timestamps: true
 });
 
 module.exports = mongoose.model("Syslog", syslogSchemas);
