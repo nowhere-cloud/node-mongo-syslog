@@ -13,7 +13,7 @@ const syslogSchemas = new Schema({
         type: [String],
         index: true
     },
-    time: Date,
+    time: String,
     hostname: {
         type: [String],
         index: true
