@@ -11,12 +11,12 @@ const syslogSchemas = new Schema({
     facility: Number,
     severity: Number,
     tag: {
-        type: [String],
+        type: String,
         index: true
     },
-    time: Date,
+    time: String,
     hostname: {
-        type: [String],
+        type: String,
         index: true
     },
     address: String,
@@ -25,8 +25,7 @@ const syslogSchemas = new Schema({
     size: Number,
     msg: String
 }, {
-    capped: 2048,
-    timestamps: true
+    capped: 2048
 });
 
 module.exports = mongoose.model("Syslog", syslogSchemas);

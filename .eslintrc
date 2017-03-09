@@ -109,8 +109,8 @@ rules:
   no-shadow-restricted-names: 2
   no-shadow: 0
   no-undef-init: 2
-  no-undef: 0
-  no-undefined: 0
+  no-undef: "error"
+  no-undefined: "error"
   no-unused-vars: 0
   no-use-before-define: 0
 

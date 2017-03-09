@@ -32,10 +32,12 @@ class App {
          *  Format documented at 'schema.js', and exposed to `info`
          */
         Syslogd(function(info) {
+            console.log(info);
+            var log = new Syslog(info);
             /* Since the dataset format is good enough. It will pumped into MongoDB Directly. */
-            Syslog.create(info, (err) => {
-                /* Error Handling. */
-                if (err) return console.error.bind(console, err);
+            log.save((err) => {
+                if (err) throw err;
+                console.log(Date.now());
             });
         }).listen(514, function(err) {
             /* Indicating the Syslog Collector has been started correctly */
