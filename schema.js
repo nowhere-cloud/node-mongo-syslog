@@ -25,7 +25,11 @@ const syslogSchemas = new Schema({
     size: Number,
     msg: String
 }, {
-    capped: 2048
+    capped: {
+        size: 5242880,
+        max: 2048,
+        autoIndexId: true
+    }
 });
 
 module.exports = mongoose.model("Syslog", syslogSchemas);
