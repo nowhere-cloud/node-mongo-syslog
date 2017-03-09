@@ -14,7 +14,7 @@ const syslogSchemas = new Schema({
         type: String,
         index: true
     },
-    time: String,
+    time: Date,
     hostname: {
         type: String,
         index: true
