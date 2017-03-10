@@ -99,7 +99,7 @@ rules:
   yoda: 0
 
   # Strict
-  strict: 0
+  strict: 1
 
   # Variables
   init-declarations: 0
@@ -139,7 +139,7 @@ rules:
   func-style: 0
   id-length: 0
   id-match: 0
-  indent: [error, 4]
+  indent: [error, 2]
   jsx-quotes: 0
   key-spacing: 0
   linebreak-style: [error, unix]
@@ -175,7 +175,7 @@ rules:
   operator-linebreak: 0
   padded-blocks: 0
   quote-props: 0
-  quotes: [error, double]
+  quotes: [error, single]
   require-jsdoc: 0
   semi-spacing: 0
   semi: [error, always]
