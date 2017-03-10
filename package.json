@@ -13,6 +13,6 @@
     "amqplib": "^0.5.1",
     "moment": "^2.17.1",
     "mongoose": "^4.8.5",
-    "syslogd": "^1.1.2"
+    "syslogd": "git+https://github.com/nowhere-cloud/syslogd.git#master"
   }
 }
