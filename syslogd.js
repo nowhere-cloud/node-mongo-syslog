@@ -18,6 +18,7 @@ class App {
    */
   constructor(mongodb_uri) {
     mongoose.connect(mongodb_uri);
+    mongoose.Promise = global.Promise;
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'MongoDB Connection Error: '));
     db.once('open', () => {
