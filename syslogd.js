@@ -5,6 +5,8 @@
 const mongoose = require('mongoose');
 const Syslogd = require('syslogd');
 const Syslog = require('./schema.js');
+const bluebird = require('bluebird');
+const debug = require('debug')('syslogd');
 
 /**
  * Application Core
@@ -18,11 +20,13 @@ class App {
    */
   constructor(mongodb_uri) {
     mongoose.connect(mongodb_uri);
-    mongoose.Promise = global.Promise;
+    mongoose.Promise = bluebird;
     const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'MongoDB Connection Error: '));
+    db.on('error', (err) => {
+      throw new Error('MongoDB Connection Error: ' + err);
+    });
     db.once('open', () => {
-      console.log('MongoDB Connection Established.');
+      debug('MongoDB Connection Established.');
     });
   }
 
@@ -34,15 +38,21 @@ class App {
      */
     Syslogd(function(info) {
       var log = new Syslog(info);
+      /* Debug Function */
+      debug(JSON.stringify(info, null, 2));
       /* Since the dataset format is good enough. It will pumped into MongoDB Directly. */
       log.save((err) => {
-        if (err) throw err;
+        if (err) {
+          throw new Error(err);
+        }
       });
     }).listen(514, function(err) {
       /* Indicating the Syslog Collector has been started correctly */
-      console.log('start');
+      debug('start');
       /* Also, Error Handling. */
-      if (err) return console.error.bind(console, err);
+      if (err) {
+        throw new Error(err);
+      }
     });
   }
 }
