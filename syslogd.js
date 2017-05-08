@@ -37,6 +37,9 @@ class App {
      *  Format documented at 'schema.js', and exposed to `info`
      */
     Syslogd(function(info) {
+      if (isNaN(info.severity)) {
+        info.severity = 7;
+      }
       var log = new Syslog(info);
       /* Debug Function */
       debug(JSON.stringify(info, null, 2));
