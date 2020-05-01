@@ -42,7 +42,6 @@ class App {
       }
       var log = new Syslog(info);
       /* Debug Function */
-      debug(JSON.stringify(info, null, 2));
       /* Since the dataset format is good enough. It will pumped into MongoDB Directly. */
       log.save((err) => {
         if (err) {
